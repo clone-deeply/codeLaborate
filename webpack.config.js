@@ -19,6 +19,7 @@ module.exports = {
   ],
   devServer: {
       hot: true,
+      inline: true,
       port: 8080,
       contentBase: './src/client'
   },

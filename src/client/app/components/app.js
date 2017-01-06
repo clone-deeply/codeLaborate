@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Login from './login.js';
 import Signup from './signup.js';
 import styles from './../../style.css';
-import Dashboard from './dashboard.js';
+import Dashboard from './dashboard/dashboard.js';
 import axios from 'axios';
 import AddProj from './addProj.js';
 
