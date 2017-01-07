@@ -4,9 +4,9 @@ import Signup from './signup.jsx';
 import styles from './../../style.css';
 import Dashboard from './dashboard/dashboard.jsx';
 import axios from 'axios';
+import Chat from './chat/chat.js';
 import AddProj from './addProj.jsx';
 import Project from './projects/viewProject.jsx';
-
 
 class App extends Component {
 
@@ -15,7 +15,7 @@ class App extends Component {
     this.state = {
       page: 4,
       name: '',
-      username: '', 
+      username: '',
       password: '',
       message: '',
       newProject: '',
@@ -57,10 +57,10 @@ class App extends Component {
       });
     }).catch(function(error) {
       console.log(error);
-    }) 
+    })
   }
 
-//verify user, send user to database 
+//verify user, send user to database
   userVerify() {
     axios.post('/login', {
       username: this.state.username,
@@ -165,8 +165,9 @@ class App extends Component {
   render() {
     if (this.state.page === 0) {
       return (
+
         <div>
-          <Login 
+          <Login
             newRegistration = {this.newRegistration}
             page={this.state.page}
             userVerify = {this.userVerify}
@@ -174,13 +175,14 @@ class App extends Component {
             passwordChange = {this.passwordChange}
             message = {this.state.message}
             />
+            <Chat />
         </div>
       )
     };
 
     if (this.state.page === 1) {
-      return ( 
-        <Signup 
+      return (
+        <Signup
           newRegistration = {this.newRegistration}
           usernameChange = {this.usernameChange}
           nameChange = {this.nameChange}
@@ -192,10 +194,10 @@ class App extends Component {
           message = {this.state.message}
         />
       )
-    }  
+    }
 
     if (this.state.page === 2) {
-      return ( 
+      return (
         <Dashboard changeView={this.changeView} allProjects={this.state.allProjects}/>
       )
     }
