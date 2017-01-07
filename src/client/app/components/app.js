@@ -5,7 +5,7 @@ import styles from './../../style.css';
 import Dashboard from './dashboard/dashboard.js';
 import axios from 'axios';
 import AddProj from './addProj.js';
-
+import Chat from './chat/chat.js';
 
 class App extends Component {
 
@@ -14,7 +14,7 @@ class App extends Component {
     this.state = {
       page: 0,
       name: '',
-      username: '', 
+      username: '',
       password: '',
       message: '',
       newProject: '',
@@ -54,10 +54,10 @@ class App extends Component {
       });
     }).catch(function(error) {
       console.log(error);
-    }) 
+    })
   }
 
-//verify user, send user to database 
+//verify user, send user to database
   userVerify() {
     axios.post('/login', {
       username: this.state.username,
@@ -118,20 +118,22 @@ class App extends Component {
   render() {
     if (this.state.page === 0) {
       return (
-        <Login 
-          newRegistration = {this.newRegistration}
-          page={this.state.page}
-          userVerify = {this.userVerify}
-          usernameChange = {this.usernameChange}
-          passwordChange = {this.passwordChange}
-          message = {this.state.message}
-        />
+        <div>  <Login
+            newRegistration = {this.newRegistration}
+            page={this.state.page}
+            userVerify = {this.userVerify}
+            usernameChange = {this.usernameChange}
+            passwordChange = {this.passwordChange}
+            message = {this.state.message}
+            />
+            <Chat />
+        </div>
       )
     };
 
     if (this.state.page === 1) {
-      return ( 
-        <Signup 
+      return (
+        <Signup
           newRegistration = {this.newRegistration}
           usernameChange = {this.usernameChange}
           nameChange = {this.nameChange}
@@ -143,10 +145,10 @@ class App extends Component {
           message = {this.state.message}
         />
       )
-    }  
+    }
 
     if (this.state.page === 2) {
-      return ( 
+      return (
         <Dashboard changeView = {this.changeView}/>
       )
     }

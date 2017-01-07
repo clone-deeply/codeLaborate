@@ -13,8 +13,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -96,7 +96,7 @@ header nav li:last-of-type {
   margin-right: 0;
 }
 
-/* Content 
+/* Content
 ============================================================== */
 .content {
   padding: 1em 0;
@@ -165,7 +165,7 @@ header nav li:last-of-type {
 }
 
 
-/* Create Project 
+/* Create Project
 ============================================================== */
 #create-project {
   width: 640px;
@@ -267,7 +267,7 @@ textarea {
   margin-top: 2.25em;
 }
 
-/* View Project 
+/* View Project
 ============================================================== */
 .center span {
   font-weight: bold;
@@ -446,3 +446,13 @@ footer {
 .username {
 }
 
+#chat-bubble {
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+  border-radius: 50%;
+  background-size: 70px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('logo.png');
+}
