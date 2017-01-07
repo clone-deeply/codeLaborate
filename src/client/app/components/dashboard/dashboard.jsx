@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './../header.jsx';
-import NewProj from './newProj';
+import NewProj from './newProj.jsx';
 
 class Dashboard extends Component {
   render() {
