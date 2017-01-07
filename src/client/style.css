@@ -2,6 +2,16 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
 /* Reset
 ============================================================== */
 html, body, div, span, applet, object, iframe,
@@ -101,6 +111,10 @@ header nav li:last-of-type {
 ============================================================== */
 .content {
   padding: 1em 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .content h2 {
   font-size: 3em;
@@ -117,10 +131,49 @@ header nav li:last-of-type {
 ============================================================== */
 .no-projects {
   text-align: center;
+  display: flex;
+  max-width: 840px;
+  flex-wrap: wrap;
+  
+}
+
+#no-new {
+  text-align: center;
+}
+
+#projdisplay {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  margin: 5px;
 }
 
 #project-list {
   margin-top: 1.5em;
+}
+
+#proj-title {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  height: 50px;
+  word-wrap: break-word;
+  overflow-y: scroll;
+}
+
+#proj-summary {
+  text-align: left;
+  height: 100px;
+  margin-left: 5px;
+  margin-right: 5px;
+  word-wrap: break-word;
+  overflow-y: scroll;
+}
+
+#proj-btn {
+  bottom: 0;
 }
 
 #project-list li {
@@ -177,6 +230,10 @@ header nav li:last-of-type {
 ::-webkit-input-placeholder {
    font-family: 'Open Sans', sans-serif;
    font-size: 12px;
+}
+
+#team-select {
+  width: 100px;
 }
 
 input {

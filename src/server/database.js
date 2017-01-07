@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('postgres://itjhrgaa:qAkrhaPSbZHYhZT0hu7XV5HYtOVV6jKQ@elmer.db.elephantsql.com:5432/itjhrgaa');
+const sequelize = new Sequelize('postgres://cjyrmvcq:H3qXH_73fyYeZlGFg9_nIKZausC1mmAr@elmer.db.elephantsql.com:5432/cjyrmvcq');
 
 sequelize.authenticate().then(function() {
   console.log('Connected!');
