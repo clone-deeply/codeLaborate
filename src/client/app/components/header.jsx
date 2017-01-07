@@ -5,7 +5,7 @@ class Header extends Component {
     return (
     <header>
     <div className="container">
-      <h1 className="logo"><a href="#" onClick={ () => {this.props.changeView(2)}}><img src="http://i.imgur.com/dLQMwZp.png" /></a></h1>
+      <h1 className="logo"><a href="#" onClick={ () => {this.props.changeView(2)}}><img style={ styles } src={ require('./../assets/logo_small.png') } /></a></h1>
       <nav>
         <ul id="navigation">
           <li><a href="#" onClick={ () => {this.props.changeView(2)}}>Dashboard</a></li>
@@ -17,6 +17,10 @@ class Header extends Component {
   </header>
     )
   }
+}
+
+const styles = {
+  height: '50px'
 }
 
 export default Header;

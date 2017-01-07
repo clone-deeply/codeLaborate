@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Header from './../header';
+import Header from './../header.jsx';
 
 class Dashboard extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header changeView={ this.props.changeView }/>
         <section id="main">
           <div className="container">
             <div className="content">

@@ -26,7 +26,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js?$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loaders: ['react-hot', 'babel?presets[]=es2015,presets[]=react'],
         include: path.join(__dirname, 'src')
@@ -34,7 +34,8 @@ module.exports = {
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
-      }
+      },
+      { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' }
     ]
   }
 };

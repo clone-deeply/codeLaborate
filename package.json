@@ -30,9 +30,11 @@
     "jquery": "^3.1.1",
     "pg": "^6.1.2",
     "pg-hstore": "^2.3.2",
+    "radium": "^0.18.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "sequelize": "^3.28.0",
+    "url-loader": "^0.5.7",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   }

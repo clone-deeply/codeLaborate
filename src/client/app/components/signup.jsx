@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import Header from './header';
+import Header from './header.jsx';
 
 
 class Signup extends Component {
   render() {
     return (
         <div id='auth'>
-        <img src="http://i.imgur.com/dLQMwZp.png" className="logo" />
-        <h2>CodeLaborate</h2>
+        <img src={ require('./../assets/logo.png') } className="logo" />
         <h5 id='message'>{this.props.message}</h5>
         <h4>Sign Up</h4>
           <input

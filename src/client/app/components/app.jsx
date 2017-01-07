@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import Login from './login.js';
-import Signup from './signup.js';
+import Login from './login.jsx';
+import Signup from './signup.jsx';
 import styles from './../../style.css';
-import Dashboard from './dashboard/dashboard.js';
+import Dashboard from './dashboard/dashboard.jsx';
 import axios from 'axios';
-import AddProj from './addProj.js';
+import AddProj from './addProj.jsx';
+import Project from './projects/viewProject.jsx';
 
 
 class App extends Component {
@@ -12,7 +13,7 @@ class App extends Component {
  constructor(props) {
     super(props);
     this.state = {
-      page: 0,
+      page: 4,
       name: '',
       username: '', 
       password: '',
@@ -118,14 +119,16 @@ class App extends Component {
   render() {
     if (this.state.page === 0) {
       return (
-        <Login 
-          newRegistration = {this.newRegistration}
-          page={this.state.page}
-          userVerify = {this.userVerify}
-          usernameChange = {this.usernameChange}
-          passwordChange = {this.passwordChange}
-          message = {this.state.message}
-        />
+        <div>
+          <Login 
+            newRegistration = {this.newRegistration}
+            page={this.state.page}
+            userVerify = {this.userVerify}
+            usernameChange = {this.usernameChange}
+            passwordChange = {this.passwordChange}
+            message = {this.state.message}
+            />
+        </div>
       )
     };
 
@@ -147,7 +150,7 @@ class App extends Component {
 
     if (this.state.page === 2) {
       return ( 
-        <Dashboard changeView = {this.changeView}/>
+        <Dashboard changeView= { this.changeView }/>
       )
     }
 
@@ -160,8 +163,13 @@ class App extends Component {
         />
       )
     }
-  }
 
+    if (this.state.page === 4) {
+      return (
+        <Project/>
+      )
+    }
+  }
 }
 
 export default App;

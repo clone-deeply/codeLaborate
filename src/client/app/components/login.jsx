@@ -5,14 +5,14 @@ class Login extends Component {
   render() {
     return (
       <div id='auth'>
-        <img src="http://i.imgur.com/dLQMwZp.png" className="logo" />
-        <h2>CodeLaborate</h2>
+        <img className='logo' src={ require('./../assets/logo.png') } />
+        <h2></h2>
         <h5 id='message'>{this.props.message}</h5>
         <h4>Log in</h4>
           <input
             className='username'
             type='text'
-            placeholder='Username'
+            placeholder='username'
             value={this.props.username}
             onChange={ (e) => {this.props.usernameChange(e)}}>
           </input>
