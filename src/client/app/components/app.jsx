@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
-import Login from './login.js';
-import Signup from './signup.js';
+import Login from './login.jsx';
+import Signup from './signup.jsx';
 import styles from './../../style.css';
-import Dashboard from './dashboard/dashboard.js';
+import Dashboard from './dashboard/dashboard.jsx';
 import axios from 'axios';
-import AddProj from './addProj.js';
 import Chat from './chat/chat.js';
+import AddProj from './addProj.jsx';
+import Project from './projects/viewProject.jsx';
 
 class App extends Component {
 
  constructor(props) {
     super(props);
     this.state = {
-      page: 0,
+      page: 4,
       name: '',
       username: '',
       password: '',
       message: '',
       newProject: '',
       newProjectSummary: '',
+      allProjects: [],
 
     }
     this.newRegistration = this.newRegistration.bind(this);
@@ -29,6 +31,7 @@ class App extends Component {
     this.userVerify = this.userVerify.bind(this);
     this.changeView = this.changeView.bind(this);
     this.projChange = this.projChange.bind(this);
+    this.projSummaryChange = this.projSummaryChange.bind(this);
     this.createProject = this.createProject.bind(this);
   }
 
@@ -64,6 +67,22 @@ class App extends Component {
       password: this.state.password
       }).then((res) => {
         this.setState({page: res.data.view, message: res.data.message})
+
+        axios.get('/projects')
+        .then((response) =>{
+          let newArray = [];
+          for(let i=0; i<response.data.length; i++) {
+            newArray.push({title: response.data[i].title, summary: response.data[i].summary})
+          }
+          this.setState({allProjects: newArray});
+          console.log(newArray);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+
+
       }).catch((error) => {
         console.log(error);
     })
@@ -71,6 +90,7 @@ class App extends Component {
 
 //create new project in database, send client to dashboard
   createProject() {
+    console.log('hello hello hello', this.state.newProjectSummary);
     axios.post('/createProject', {
       title: this.state.newProject,
       summary: this.state.newProjectSummary
@@ -79,6 +99,29 @@ class App extends Component {
     }).catch((error) => {
       console.log(error);
     })
+
+    axios.get('/projects')
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+    axios.get('/projects')
+    .then((response) =>{
+      let newArray = [];
+      for(let i=0; i<response.data.length; i++) {
+        newArray.push({title: response.data[i].title, summary: response.data[i].summary})
+      }
+      this.setState({allProjects: newArray});
+      console.log(newArray);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+
   }
 
 //changes to appropriate view based on passed in variable
@@ -114,11 +157,17 @@ class App extends Component {
     this.setState(state);
   }
 
+  projSummaryChange(e) {
+    this.setState({newProjectSummary: e.target.value})
+  }
+
 //conditional rendering for components based on 'page' property in state
   render() {
     if (this.state.page === 0) {
       return (
-        <div>  <Login
+
+        <div>
+          <Login
             newRegistration = {this.newRegistration}
             page={this.state.page}
             userVerify = {this.userVerify}
@@ -149,7 +198,7 @@ class App extends Component {
 
     if (this.state.page === 2) {
       return (
-        <Dashboard changeView = {this.changeView}/>
+        <Dashboard changeView={this.changeView} allProjects={this.state.allProjects}/>
       )
     }
 
@@ -157,13 +206,19 @@ class App extends Component {
       return (
         <AddProj
           projChange = {this.projChange}
+          projSummaryChange = {this.projSummaryChange}
           createProject = {this.createProject}
           changeView = {this.changeView}
         />
       )
     }
-  }
 
+    if (this.state.page === 4) {
+      return (
+        <Project/>
+      )
+    }
+  }
 }
 
 export default App;
