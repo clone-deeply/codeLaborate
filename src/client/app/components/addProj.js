@@ -15,7 +15,7 @@ class AddProj extends Component {
                 <div className="form-row clearfix">
                   <div className="input-half project-title">
 
-                    <label for="project-name">Project Title</label>
+                    <label>Project Title</label>
                     <input
                       type="text"
                       id="project-name"
@@ -24,23 +24,28 @@ class AddProj extends Component {
                     />
                   </div>
                   <div className="input-half project-select">
-                    <label for="project-name">Add Team Members</label>
-                    <select name="team-select" id="team-select" placeholder="Type to find your teammate" multiple="multiple">
+                    <label>Add Team Members</label>
+                  
+                    <select id="team-select" multiple> 
+                      <option value="Anto">Anto</option>
+                      <option value="Jimmy">Jimmy</option>
+                      <option value="Chris">Chris</option>
                     </select>
+                   
 
                   </div>
                 </div>
                 <div className="input-full project-summary">
-                  <label for="project-summary">Summarize Your Project</label>
+                  <label>Summarize Your Project</label>
 
                   <textarea
                     id="project-summary"
                     id="project-summary"
-                    onChange={(e) => {this.props.projChange(e)}} >
+                    onChange={(e) => {this.props.projSummaryChange(e)}} >
                   </textarea>
                 </div>
                 <div className="clearfix">
-                  <button type="submit" id="project-submit" onClick={ () => {this.props.createProject} }>Save Project</button><a href="#" className="reset-project">Reset Project</a>
+                  <button type="submit" id="project-submit" onClick={ () => {this.props.createProject()} }>Save Project</button><a href="#" className="reset-project">Reset Project</a>
 
                 </div>
               </div>

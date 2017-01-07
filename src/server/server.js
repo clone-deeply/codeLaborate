@@ -8,6 +8,8 @@ const path = require('path');
 const UserController = require('./controllers/UserController');
 const ProjectController = require('./controllers/ProjectController');
 const TaskController = require('./controllers/TaskController');
+const Projects = require('./models/ProjectModel');
+const ProjectUsers = require('./models/ProjectUserModel');
 
 const app = express();
 
@@ -45,6 +47,14 @@ app.post('/login', UserController.login);
 
 // create new project row in database, send to ProjectController middleware
 app.post('/createProject', ProjectController.create);
+
+app.get('/projects', function(req, res){
+  console.log('in get request')
+  Projects.findAll().then(function(project) {
+        res.send(project);
+      });
+})
+
 
 app.listen(port, () => {
   console.log("Listening on port " + port);
