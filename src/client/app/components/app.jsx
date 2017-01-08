@@ -4,7 +4,7 @@ import Signup from './signup.jsx';
 import styles from './../../style.css';
 import Dashboard from './dashboard/dashboard.jsx';
 import axios from 'axios';
-import Chat from './chat/chat.js';
+import Chat from './chat/chat.jsx';
 import AddProj from './addProj.jsx';
 import Project from './projects/viewProject.jsx';
 
@@ -13,7 +13,7 @@ class App extends Component {
  constructor(props) {
     super(props);
     this.state = {
-      page: 4,
+      page: 0,
       name: '',
       username: '',
       password: '',
