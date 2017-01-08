@@ -8,7 +8,7 @@ class Login extends Component {
         <img className='logo' src={ require('./../assets/logo.png') } />
         <h2></h2>
         <h5 id='message'>{this.props.message}</h5>
-        <h4>Log in</h4>
+        <h4>Log in!</h4>
           <input
             className='username'
             type='text'
