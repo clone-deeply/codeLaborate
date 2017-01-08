@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Messages from './message.js';
+import Messages from './message.jsx';
 
 
 class Chat extends Component {
