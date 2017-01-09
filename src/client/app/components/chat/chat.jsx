@@ -8,6 +8,7 @@ class Chat extends Component {
     super(props);
     this.state = {
       page: 0,
+      currentUser: this.props.username,
       currentMsg: '',
       messages: [
         {author: "Jimmy",
@@ -20,6 +21,7 @@ class Chat extends Component {
     }
     this.bubbleChange = this.bubbleChange.bind(this);
     this.messageChange = this.messageChange.bind(this);
+    this.messagePost = this.messagePost.bind(this);
   }
 
 bubbleChange() {
@@ -35,8 +37,20 @@ bubbleChange() {
 messageChange(e) {
   const state = {};
   state.currentMsg = e.target.value;
-  this.setState(state);
-  console.log('currentMsg', currentMsg);
+  this.setState({currentMsg: state.currentMsg});
+  console.log('currentMsg', state.currentMsg);
+}
+
+messagePost() {
+  const state = {};
+  state.messages = this.state.messages;
+  state.messages.push({
+    author: this.props.username,
+    message: this.state.currentMsg,
+  })
+  this.setState({messages: state.messages})
+  console.log(this.state.messages)
+  this.refs.inputEntry.value="";
 }
 
 render() {
@@ -55,10 +69,11 @@ render() {
 
       <div id="chat-window">
         <Messages
+        username={this.props.username}
         messages={this.state.messages}
         />
-        <input id="chat-input" type="text" onChange={ (e) => {this.messageChange(e)}}></input>
-        <button id="chat-button">SEND</button>
+        <input id="chat-input" ref="inputEntry" type="text" onChange={ (e) => {this.messageChange(e)}}></input>
+        <button id="chat-button" onClick={this.messagePost}>SEND</button>
       </div>
 
     )
