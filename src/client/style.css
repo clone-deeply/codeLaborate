@@ -134,7 +134,7 @@ header nav li:last-of-type {
   display: flex;
   max-width: 840px;
   flex-wrap: wrap;
-  
+
 }
 
 #no-new {
@@ -507,10 +507,32 @@ footer {
 #chat-bubble {
   height: 100px;
   width: 100px;
-  border: 1px solid black;
   border-radius: 50%;
   background-size: 70px;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url('logo.png');
+}
+
+#chat-window {
+  height: 300px;
+  width: 30%;
+  border: 1px solid black;
+  border-radius: 3px;
+  position: absolute;
+}
+
+#chat-input {
+  width: 99%;
+  height: 25px;
+}
+
+.messages {
+  height: 20px;
+  width: 99%;
+  background-color: gray;
+}
+
+#chat-button {
+  border: 1px solid black;
 }
