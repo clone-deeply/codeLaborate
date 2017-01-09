@@ -36,6 +36,7 @@ messageChange(e) {
   const state = {};
   state.currentMsg = e.target.value;
   this.setState(state);
+  console.log('currentMsg', currentMsg);
 }
 
 render() {
@@ -56,7 +57,7 @@ render() {
         <Messages
         messages={this.state.messages}
         />
-        <input id="chat-input" type="text"></input>
+        <input id="chat-input" type="text" onChange={ (e) => {this.messageChange(e)}}></input>
         <button id="chat-button">SEND</button>
       </div>
 
