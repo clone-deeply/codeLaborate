@@ -3,17 +3,17 @@ const sequelize = require('./../database');
 
 const Messages = sequelize.define('messages', {
   author: {
-    type: Sequelize.string(1000),
+    type: Sequelize.STRING(1000),
     field: 'message_author',
   },
   message: {
-    type: Sequelize.string(1000),
+    type: Sequelize.STRING(1000),
     field: 'message_message',
   },
 }, {
   freezeTableName: true
 });
 
-Messages.sync();
+sequelize.sync();
 
 module.exports = Messages;

@@ -29,6 +29,7 @@ class ViewProject extends Component {
   }
 
   addFeature(e) {
+    console.log(this.props);
     let newState;
     if(e.key === 'Enter') {
       e.preventDefault();
@@ -38,13 +39,14 @@ class ViewProject extends Component {
 
       axios.post('/addFeature', {
         featureName: e.target.value,
+        projectId: this.props.projectData.id,
       }).then((res) => {
         // GET FEATURES
       }).catch((error) => {
         console.log(error);
       })
 
-      this.props.getFeatures();
+      this.getFeatures();
 
       e.target.value = '';
     }
