@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
-import Header from './header.jsx';
+import Header from './../header.jsx';
+import axios from 'axios';
+import Radium from 'radium';
 let cssClasses = `form-row clearfix`;
 
 class AddProj extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+      title: '',
+      team: [],
+      summary: '',
+    }
+  }
+
   render() {
     return (
       <div>
-        <Header changeView = {this.props.changeView}/>
+        <Header changeView={this.props.changeView}/>
         <section id="main">
           <div className="container">
             <div className="content">
@@ -26,7 +38,7 @@ class AddProj extends Component {
                   <div className="input-half project-select">
                     <label>Add Team Members</label>
                   
-                    <select id="team-select" multiple> 
+                    <select style={select} id="team-select" multiple> 
                       <option value="Anto">Anto</option>
                       <option value="Jimmy">Jimmy</option>
                       <option value="Chris">Chris</option>
@@ -58,4 +70,12 @@ class AddProj extends Component {
   }
 }
 
-export default AddProj;
+const select = {
+  borderRadius: '4px',
+  borderColor: '#eaeaea',
+  borderStyle: 'solid',
+  borderWidth: '1px',
+  width: '100%'
+}
+
+export default Radium(AddProj);
