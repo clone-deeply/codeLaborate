@@ -57,8 +57,10 @@ app.post('/addFeature', FeatureController.create);
 
 app.get('/features', FeatureController.getFeatures)
 
+app.get('/messages', function(req, res) {
+  console.log('getting current messages...')
+});
 
 app.listen(port, () => {
   console.log("Listening on port " + port);
 });
-
