@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('./../database');
+const Features = require('./FeatureModel');
 
 const Projects = sequelize.define('projects', {
   title: {
@@ -7,13 +8,11 @@ const Projects = sequelize.define('projects', {
     field: 'project_title',
   },
   summary: {
-    type: Sequelize.TEXT(1000),
+    type: Sequelize.TEXT,
     field: 'summary',
   },
-}, {
-  freezeTableName: true
 });
 
-Projects.sync();
+sequelize.sync();
 
 module.exports = Projects;
