@@ -8,13 +8,40 @@ class Chat extends Component {
     super(props);
     this.state = {
       page: 0,
+      currentMsg: '',
+      messages: [
+        {author: "Jimmy",
+        message: "This is Jimmy!",
+      },
+      {author: "Chris",
+      message: "This is Chris!",
+      }
+      ],
     }
-
+    this.bubbleChange = this.bubbleChange.bind(this);
+    this.messageChange = this.messageChange.bind(this);
   }
+
+bubbleChange() {
+  const state = {};
+  if(this.state.page === 1) {
+    state.page = 0;
+    this.setState({page: state.page});
+  }
+  state.page = 1;
+  this.setState({page: state.page});
+}
+
+messageChange(e) {
+  const state = {};
+  state.currentMsg = e.target.value;
+  this.setState(state);
+}
+
 render() {
   if(this.state.page === 0) {
     return(
-      <div id="chat-bubble"></div>
+      <div id="chat-bubble" onClick={this.bubbleChange}></div>
     )
   }
   if(this.state.page === 1) {
@@ -26,9 +53,11 @@ render() {
       // }
 
       <div id="chat-window">
-        {array}
-
-        <input type="text"></input>
+        <Messages
+        messages={this.state.messages}
+        />
+        <input id="chat-input" type="text"></input>
+        <button id="chat-button">SEND</button>
       </div>
 
     )

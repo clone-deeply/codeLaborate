@@ -55,8 +55,12 @@ app.get('/projects', function(req, res){
       });
 })
 
+app.get('/messages', function(req, res) {
+  console.log('getting current messages...')
+  
+})
+
 
 app.listen(port, () => {
   console.log("Listening on port " + port);
 });
-
