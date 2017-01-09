@@ -2,15 +2,30 @@ import React, { Component } from 'react';
 import Header from './../header.jsx';
 import Feature from './feature.jsx';
 import Radium from 'radium';
+import axios from 'axios';
 
 class ViewProject extends Component {
   constructor(props) {
     super(props);
+    this.getFeatures();
     this.addFeature = this.addFeature.bind(this);
-    this.addTask = this.addTask.bind(this);
     this.state = {
       features: [],
     };
+  }
+
+  getFeatures() {
+    axios.get('/features')
+    .then((response) =>{
+      let newArray = [];
+      for(let i=0; i< response.data.length; i++) {
+        newArray.push(response.data[i].featureName);
+      }
+      this.setState({features: newArray});
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   addFeature(e) {
@@ -20,19 +35,25 @@ class ViewProject extends Component {
       newState = this.state.features;
       newState.push(e.target.value)
       this.setState({ features: newState });
-      console.log(this.state);
+
+      axios.post('/addFeature', {
+        featureName: e.target.value,
+      }).then((res) => {
+        // GET FEATURES
+      }).catch((error) => {
+        console.log(error);
+      })
+
+      this.props.getFeatures();
+
       e.target.value = '';
     }
-  }
-
-  addTask() {
-    
   }
 
   render() {
     const features = []
     this.state.features.forEach((feature, i) => {
-      features.push(<Feature name={feature} addTask={this.addTask} key={i}/>);
+      features.push(<Feature name={feature} key={i}/>);
     });
     return (
       <div>
@@ -40,26 +61,25 @@ class ViewProject extends Component {
         <section id="main">
             <div className="container">
               <div className="content">
-                <h2>Codesmith Senior Project</h2>
-                <h3 className="heading">Project Overview</h3>
-                <div className="project-row clearfix">
-                  <div className="team one-third">
+                <h3 className="heading" style={heading}><span style={purple}>{this.props.projectData.title}</span>: Project Overview</h3>
+                <div className="project-row clearfix" style={overview}>
+                  <div className="team one-third" style={oneThird}>
                     <h3>Team Members</h3>
-                    <p>Brian, Jon, Max, Mike</p>
+                    <p>Anto, Chris, Jimmy</p>
                   </div>
-                  <div className="project-date one-third">
+                  <div className="project-date one-third" style={oneThird}>
                     <h3>Project Date</h3>
                     <p>01/05/2017</p>
                   </div>
-                  <div className="project-status one-third">
+                  <div className="project-status one-third" style={oneThird}>
                     <h3>Tasks Completed</h3>
                     <p>0 of 0 (0%)</p>
                   </div>
                 </div>
-                <div className="project-row clearfix">
-                  <div id="project-summary">
+                <div className="project-row clearfix" style={overview}>
+                  <div id="project-summary" style={summary}>
                     <h3>Project Summary</h3>
-                    <p>Create an app that everyone loves and no one complains about on hacker news.</p>
+                    <p>{this.props.projectData.summary}</p>
                   </div>
                 </div>
                 {/*
@@ -69,14 +89,16 @@ class ViewProject extends Component {
                   </div>
                 */}
                 {/*-----------------------------HEADERS--------------------------------*/}
-                <div style={headers}>
-                  <span style={stage}>Feature</span>
-                  <span style={stage}>To-do</span>
-                  <span style={stage}>Working On It...</span>
-                  <span style={stage}>Completed</span>
-                </div>
-                {/*-----------------------------FEATURES--------------------------------*/}
-                {features}
+                <div style={featureContainer}>
+                  <div style={headers}>
+                    <span style={stage}>Feature</span>
+                    <span style={stage}>To-do</span>
+                    <span style={stage}>Working On It...</span>
+                    <span style={stage}>Completed</span>
+                  </div>
+                  {/*-----------------------------FEATURES--------------------------------*/}
+                  {features}
+                </div>  
                 {/*-----------------------------BUTTON--------------------------------*/}
                 <form style={btnInput} type="submit">
                   <button style={btn}>+</button>
@@ -88,6 +110,40 @@ class ViewProject extends Component {
       </div>
     )
   }
+}
+
+const featureContainer = {
+  width: '100%',
+  borderTopRightRadius: '4px',
+  borderTopLeftRadius: '4px',
+  borderColor: '#eaeaea',
+  borderStyle: 'solid',
+  borderWidth: '1px',
+  margin: '20px 0',
+}
+
+const purple = {
+  color: "#AA00FF"
+}
+
+const heading = {
+  margin: '0 0 5px 0',
+}
+
+const overview = {
+  width: '100%',
+  maxHeight: '150px',
+  display: 'flex',
+  flexDirection: 'row'
+}
+
+const summary = {
+  width: '100%'
+}
+
+const oneThird = {
+  flexGrow: 1,
+  maxHeight: '100%'
 }
 
 const btnInput = {
@@ -103,13 +159,8 @@ const input = {
 
 const headers = {
   backgroundColor: '#fafafa',
-  borderRadius: '4px',
-  height: '60px',
+  height: '40px',
   width: '100%',
-  borderWidth: '1px',
-  borderStyle: 'solid',
-  borderColor: '#eaeaea',
-  margin: '15px 0',
   display: 'flex',
   alignItems: 'center',
 }
@@ -122,36 +173,14 @@ const stage = {
 }
 
 const btn = {
-  outline: 0,
-  display: 'inline-block',
-  background: '#FFF',
-  color: '#EEE',
-  borderRadius: '50%',
-  borderStyle: 'solid',
-  borderColor: '#EEE',
-  borderWidth: '1px',
-  textAlign: 'center',
-  height: '25px',
-  width: '25px',
-  fontSize: '16px',
-  fontFamily: 'Open-Sans, sans-serif',
-  margin: '0 5px',
+  backgroundColor: 'white',
+  border: 'none',
+  color: '#eaeaea',
+  fontSize: '1.5em',
+  userSelect: 'none',
   ':hover': {
-    color: '#AA00FF',
-    borderColor: '#AA00FF'
-  },
-  ':focus': {
-    backgroundColor: '#FFF',
-  },
-  ':active': {
-    backgroundColor: '#AA00FF',
-    color: 'white',
-    borderColor: '#EEE',
-  },
-  ':visisted': {
-    backgroundColor: '#EEE',
-    color: 'white',
-    borderColor: '#EEE',
+    color: 'rgba(0, 255, 0, .8)',
+    cursor: 'pointer'
   }
 }
 

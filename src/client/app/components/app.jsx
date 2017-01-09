@@ -5,7 +5,7 @@ import styles from './../../style.css';
 import Dashboard from './dashboard/dashboard.jsx';
 import axios from 'axios';
 import Chat from './chat/chat.jsx';
-import AddProj from './addProj.jsx';
+import AddProj from './dashboard/addProj.jsx';
 import Project from './projects/viewProject.jsx';
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
  constructor(props) {
     super(props);
     this.state = {
-      page: 0,
+      page: 2,
       name: '',
       username: '',
       password: '',
@@ -21,7 +21,12 @@ class App extends Component {
       newProject: '',
       newProjectSummary: '',
       allProjects: [],
-
+      activeProject: {
+        title: null,
+        summary: null,
+        id: null,
+        team: 'Anto, Chris, Jimmy'
+      }
     }
     this.newRegistration = this.newRegistration.bind(this);
     this.signUpPost = this.signUpPost.bind(this);
@@ -33,6 +38,9 @@ class App extends Component {
     this.projChange = this.projChange.bind(this);
     this.projSummaryChange = this.projSummaryChange.bind(this);
     this.createProject = this.createProject.bind(this);
+    this.setActiveProject = this.setActiveProject.bind(this);
+    this.getProjects = this.getProjects.bind(this);
+    this.getProjects();
   }
 
 //setState to change Login page to SignUp page
@@ -72,17 +80,13 @@ class App extends Component {
         .then((response) =>{
           let newArray = [];
           for(let i=0; i<response.data.length; i++) {
-            newArray.push({title: response.data[i].title, summary: response.data[i].summary})
+            newArray.push({title: response.data[i].title, summary: response.data[i].summary, id: response.data[i].id })
           }
           this.setState({allProjects: newArray});
-          console.log(newArray);
         })
         .catch(function (error) {
           console.log(error);
         });
-
-
-
       }).catch((error) => {
         console.log(error);
     })
@@ -90,24 +94,18 @@ class App extends Component {
 
 //create new project in database, send client to dashboard
   createProject() {
-    console.log('hello hello hello', this.state.newProjectSummary);
     axios.post('/createProject', {
       title: this.state.newProject,
       summary: this.state.newProjectSummary
     }).then((res) => {
-      this.setState({page: res.data.view, message: res.data.message})
+      this.setState({page: res.data.view, message: res.data.message});
+      this.getProjects();
     }).catch((error) => {
       console.log(error);
     })
+  }
 
-    axios.get('/projects')
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
+  getProjects() {
     axios.get('/projects')
     .then((response) =>{
       let newArray = [];
@@ -115,13 +113,10 @@ class App extends Component {
         newArray.push({title: response.data[i].title, summary: response.data[i].summary})
       }
       this.setState({allProjects: newArray});
-      console.log(newArray);
     })
     .catch(function (error) {
       console.log(error);
     });
-
-
   }
 
 //changes to appropriate view based on passed in variable
@@ -161,6 +156,14 @@ class App extends Component {
     this.setState({newProjectSummary: e.target.value})
   }
 
+  // SET ACTIVE PROJECT SO WE CAN VIEW PROJECT WITH APPROPRIATE data
+
+  setActiveProject(data) {
+    const state = {};
+    state.activeProject = data;
+    this.setState(state);
+  }
+
 //conditional rendering for components based on 'page' property in state
   render() {
     if (this.state.page === 0) {
@@ -198,7 +201,11 @@ class App extends Component {
 
     if (this.state.page === 2) {
       return (
-        <Dashboard changeView={this.changeView} allProjects={this.state.allProjects}/>
+        <Dashboard
+          changeView={this.changeView}
+          allProjects={this.state.allProjects}
+          setActiveProject={this.setActiveProject}
+        />
       )
     }
 
@@ -215,7 +222,7 @@ class App extends Component {
 
     if (this.state.page === 4) {
       return (
-        <Project/>
+        <Project changeView={this.changeView} projectData={this.state.activeProject}/>
       )
     }
   }

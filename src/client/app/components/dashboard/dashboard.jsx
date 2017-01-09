@@ -7,10 +7,17 @@ class Dashboard extends Component {
     let projectArr = [];
     let noProjects = [];
     for (let i=0; i<this.props.allProjects.length; i++) {
-      projectArr.push(<div id="projdisplay"><NewProj allProjects={this.props.allProjects[i]}/></div>);
+      projectArr.push(
+        <NewProj
+          changeView={this.props.changeView}
+          projectData={this.props.allProjects[i]}
+          setActiveProject={this.props.setActiveProject}
+          key={i}
+        />
+      );
     }
     if (projectArr.length < 1) {
-      noProjects.push(<div id="no-new">No projects yet! <a href="#" onClick={ () => {this.props.changeView(3)} }>Create a project</a>.</div>)
+      noProjects.push(<div key="999" id="no-new">No projects yet!<a href="#" onClick={ () => {this.props.changeView(3)} }> Create a project</a>.</div>)
     } else {
       noProjects = [];
     }
@@ -22,13 +29,23 @@ class Dashboard extends Component {
             <div className="content">
               <h2>Projects</h2>
               {noProjects}
-              <p className="no-projects">{projectArr}</p>
+              <div style={styles}>
+                {projectArr}
+              </div>
             </div>
           </div>
         </section>
       </div>
     )
   }
+}
+
+const styles = {
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'flex-start',
+  flexWrap: 'wrap',
+  width: '100%'
 }
 
 export default Dashboard;
