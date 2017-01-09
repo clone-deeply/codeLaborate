@@ -1,10 +1,9 @@
+const sequelize = require('./../database');
 const Projects = require('./../models/ProjectModel');
-const ProjectUsers = require('./../models/ProjectUserModel');
 
 //create new project
 const ProjectController = {
   create: function(req, res) {
-    console.log('hello i got to projectcontroller.create')
     Projects.create({
       title: req.body.title,
       summary: req.body.summary
@@ -45,5 +44,6 @@ const ProjectController = {
     });
   }
 }
+
 
 module.exports = ProjectController;

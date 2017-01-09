@@ -5,9 +5,10 @@ import Radium from 'radium';
 const Feature = (props) => {
   return (
     <div style={feature}>
+      <div key="x" style={x}>+</div>
       <span style={featureName}>
         <div style={name}>{ props.name }</div>
-        <button style={btn}>ADD TASK</button>
+        <button key="addTask" style={btn}>ADD TASK</button>
       </span>
       <span style={grey}></span>
       <span style={white}></span>
@@ -26,6 +27,18 @@ const btn = {
     color: 'white',
   }
 }
+const x = {
+  color: '#eaeaea',
+  fontSize: '2em',
+  position: 'absolute',
+  marginLeft: '-30px',
+  userSelect: 'none',
+  transform: 'rotate(45deg)',
+  ':hover': {
+    color: 'red',
+    cursor: 'pointer'
+  }
+}
 
 const featureName = {
   display: 'inline-block',
@@ -38,6 +51,8 @@ const featureName = {
 const name = {
   fontSize: '24px',
   fontWeight: 'bold',
+  maxWidth: '230px',
+  overflow: 'hidden',
 }
 
 const feature = {
@@ -45,10 +60,9 @@ const feature = {
   flexDirection: 'row',
   alignItems: 'center',
   minHeight: '150px',
-  border: '1px solid #eaeaea',
-  borderRadius: '3px',
-  overflow: 'auto',
-  marginBottom: '5px'
+  borderTop: '1px solid #eaeaea',
+  width: '100%',
+  position: 'relative',
 }
 
 const white = {

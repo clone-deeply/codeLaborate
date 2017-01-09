@@ -7,14 +7,13 @@ const db = require('./database');
 const path = require('path');
 const UserController = require('./controllers/UserController');
 const ProjectController = require('./controllers/ProjectController');
-const TaskController = require('./controllers/TaskController');
+const FeatureController = require('./controllers/FeatureController');
 const Projects = require('./models/ProjectModel');
-const ProjectUsers = require('./models/ProjectUserModel');
 
 const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //get index.html
 app.get('/', function (req, res) {
@@ -49,17 +48,18 @@ app.post('/login', UserController.login);
 app.post('/createProject', ProjectController.create);
 
 app.get('/projects', function(req, res){
-  console.log('in get request')
   Projects.findAll().then(function(project) {
         res.send(project);
       });
 })
 
+app.post('/addFeature', FeatureController.create);
+
+app.get('/features', FeatureController.getFeatures)
+
 app.get('/messages', function(req, res) {
   console.log('getting current messages...')
-  
-})
-
+});
 
 app.listen(port, () => {
   console.log("Listening on port " + port);

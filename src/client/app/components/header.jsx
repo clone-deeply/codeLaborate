@@ -10,7 +10,7 @@ class Header extends Component {
         <ul id="navigation">
           <li><a href="#" onClick={ () => {this.props.changeView(2)}}>Dashboard</a></li>
           <li><a href="#" onClick={ () => {this.props.changeView(3)}}>Add Project</a></li>
-          <li><a href="#" onClick={ () => {this.props.changeView(2)}}>Profile</a></li>
+          {/*<li><a href="#" onClick={ () => {this.props.changeView(2)}}>Profile</a></li>*/}
         </ul>
       </nav>
     </div>
