@@ -178,7 +178,6 @@ class App extends Component {
             passwordChange = {this.passwordChange}
             message = {this.state.message}
             />
-            <Chat />
         </div>
       )
     };
@@ -201,11 +200,14 @@ class App extends Component {
 
     if (this.state.page === 2) {
       return (
+      <div>
         <Dashboard
           changeView={this.changeView}
           allProjects={this.state.allProjects}
           setActiveProject={this.setActiveProject}
         />
+        <Chat username={this.state.username} />
+      </div>
       )
     }
 

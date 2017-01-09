@@ -8,11 +8,10 @@ const Messages = sequelize.define('messages', {
   },
   message: {
     type: Sequelize.STRING(1000),
-    field: 'message_message',
-  },
-}, {
-  freezeTableName: true
+  }
 });
+
+Messages.belongsTo(Projects);
 
 sequelize.sync();
 
