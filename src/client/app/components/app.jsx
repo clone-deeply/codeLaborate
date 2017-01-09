@@ -13,7 +13,7 @@ class App extends Component {
  constructor(props) {
     super(props);
     this.state = {
-      page: 2,
+      page: 0,
       name: '',
       username: '',
       password: '',
