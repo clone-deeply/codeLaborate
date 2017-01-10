@@ -9,10 +9,14 @@ class Dashboard extends Component {
     for (let i=0; i<this.props.allProjects.length; i++) {
       projectArr.push(
         <NewProj
+          deleteId={this.props.deleteId}
+          id={this.props.allProjects[i].id}
+          deleteProject={this.props.deleteProject}
+          getProjects={this.props.getProjects}
           changeView={this.props.changeView}
           projectData={this.props.allProjects[i]}
           setActiveProject={this.props.setActiveProject}
-          key={i}
+          key={this.props.allProjects[i].id}
         />
       );
     }

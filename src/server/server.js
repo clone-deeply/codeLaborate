@@ -53,6 +53,17 @@ app.get('/projects', function(req, res){
       });
 })
 
+app.delete('/deleteProject', function(req, res){
+  Projects.findOne({
+      where: {id: req.body.idToDelete}
+    }).then(function(project) {
+      project.destroy().then(function() {
+        res.send('Project deleted');
+      });
+    });
+
+})
+
 app.post('/addFeature', FeatureController.create);
 
 app.get('/features', FeatureController.getFeatures)
