@@ -5,11 +5,18 @@ class NewProj extends Component {
   constructor(props) {
     super(props);
     this.showProject = this.showProject.bind(this);
+    this.deleteProject = this.deleteProject.bind(this);
   }
 
   showProject() {
     this.props.setActiveProject(this.props.projectData);
     this.props.changeView(4);
+  }
+
+  deleteProject() {
+    console.log('props ', this.props)
+    this.props.deleteId(this.props.id);
+    this.props.getProjects();
   }
 
   render() {
@@ -18,6 +25,7 @@ class NewProj extends Component {
         <div style={title}>{this.props.projectData.title}</div>
         <div style={summary}>{this.props.projectData.summary}</div>
         <button key="333" style={button} onClick={this.showProject}>View Details</button>
+        <button key="334" style={button2} onClick={this.deleteProject}>Delete Project</button>
       {/*
         <div id="proj-title">{this.props.projectData.title}</div>
         <div id="proj-summary">{this.props.projectData.summary}</div>
@@ -64,6 +72,18 @@ const title = {
 }
 
 const button = {
+  position: 'absolute',
+  outline: 'none',
+  backgroundColor: '#EAEAEA',
+  border: 'none',
+  bottom: '18px',
+  width: '100%',
+  ':hover': {
+    backgroundColor: "#AEAEAE"
+  }
+}
+
+const button2 = {
   position: 'absolute',
   outline: 'none',
   backgroundColor: '#EAEAEA',

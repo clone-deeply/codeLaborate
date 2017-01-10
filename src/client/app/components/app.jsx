@@ -15,6 +15,7 @@ class App extends Component {
     this.state = {
       page: 0,
       name: '',
+      idToDelete: 0,
       username: '',
       password: '',
       message: '',
@@ -40,6 +41,7 @@ class App extends Component {
     this.createProject = this.createProject.bind(this);
     this.setActiveProject = this.setActiveProject.bind(this);
     this.getProjects = this.getProjects.bind(this);
+    this.deleteId = this.deleteId.bind(this);
     this.getProjects();
   }
 
@@ -109,14 +111,40 @@ class App extends Component {
     axios.get('/projects')
     .then((response) =>{
       let newArray = [];
+
+        console.log('this is db stuff ', response)
       for(let i=0; i<response.data.length; i++) {
-        newArray.push({title: response.data[i].title, summary: response.data[i].summary})
+        newArray.push({title: response.data[i].title, summary: response.data[i].summary, id: response.data[i].id})
+
       }
       this.setState({allProjects: newArray});
     })
     .catch(function (error) {
       console.log(error);
     });
+  }
+
+  deleteId(id) {
+
+    axios({method: 'delete', 
+            url: '/deleteProject', 
+            data: {idToDelete: id}
+          }).then(function(){
+            console.log('deleted successfully');
+            this.getProjects();
+          }.bind(this));
+
+    // axios({method: 'delete', 
+    //         url: '/deleteFeatures', 
+    //         data: {idToDelete: id}
+    //       });
+    
+  }
+
+  deleteProject() {
+    console.log('got to delete')
+    
+
   }
 
 //changes to appropriate view based on passed in variable
@@ -202,6 +230,9 @@ class App extends Component {
       return (
       <div>
         <Dashboard
+          deleteId={this.deleteId}
+          deleteProject={this.deleteProject}
+          getProjects={this.getProjects}
           changeView={this.changeView}
           allProjects={this.state.allProjects}
           setActiveProject={this.setActiveProject}
