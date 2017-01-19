@@ -3,15 +3,12 @@ const sequelize = require('./../database');
 
 const Messages = sequelize.define('messages', {
   author: {
-    type: Sequelize.String(1000),
+    type: Sequelize.STRING(1000),
     field: 'message_author',
   },
   message: {
-    type: Sequelize.String(1000),
-    field: 'message_message',
-  },
-}, {
-  freezeTableName: true
+    type: Sequelize.STRING(1000),
+  }
 });
 
 Messages.belongsTo(Projects);

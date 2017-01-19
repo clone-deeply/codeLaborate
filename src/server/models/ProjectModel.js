@@ -13,6 +13,9 @@ const Projects = sequelize.define('projects', {
   },
 });
 
+Projects.hasMany(Features);
+Features.belongsTo(Projects); // projectId to model
+
 sequelize.sync();
 
 module.exports = Projects;
